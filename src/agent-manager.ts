@@ -285,6 +285,8 @@ export class AgentManager {
           record.pendingSteers = undefined;
         }
         options.onSessionCreated?.(session);
+        // Emit event for extensions that need session access (e.g., memory systems)
+        pi.events.emit("subagents:session_ready", { id, type, session, record });
       },
     })
       .then(({ responseText, session, aborted, steered }) => {
