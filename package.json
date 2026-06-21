@@ -1,7 +1,7 @@
 {
   "name": "@engrammic/veil-subagents",
   "version": "0.10.3",
-  "description": "A pi extension that brings smart Claude Code-style autonomous sub-agents to pi.",
+  "description": "Autonomous sub-agents for Pi/Veil. Fork of @tintinweb/pi-subagents with session hooks and tool injection.",
   "author": "engrammic",
   "license": "MIT",
   "repository": {
