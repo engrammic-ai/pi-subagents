@@ -1,16 +1,16 @@
 {
-  "name": "@tintinweb/pi-subagents",
+  "name": "@engrammic/veil-subagents",
   "version": "0.10.3",
-  "description": "A pi extension extension that brings smart Claude Code-style autonomous sub-agents to pi.",
-  "author": "tintinweb",
+  "description": "A pi extension that brings smart Claude Code-style autonomous sub-agents to pi.",
+  "author": "engrammic",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tintinweb/pi-subagents.git"
+    "url": "https://github.com/engrammic-ai/pi-subagents.git"
   },
-  "homepage": "https://github.com/tintinweb/pi-subagents#readme",
+  "homepage": "https://github.com/engrammic-ai/pi-subagents#readme",
   "bugs": {
-    "url": "https://github.com/tintinweb/pi-subagents/issues"
+    "url": "https://github.com/engrammic-ai/pi-subagents/issues"
   },
   "keywords": [
     "pi-package",
