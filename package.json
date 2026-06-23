@@ -1,6 +1,6 @@
 {
   "name": "@engrammic/veil-subagents",
-  "version": "0.10.3",
+  "version": "0.10.4",
   "description": "Autonomous sub-agents for Pi/Veil. Fork of @tintinweb/pi-subagents with session hooks and tool injection.",
   "author": "engrammic",
   "license": "MIT",
