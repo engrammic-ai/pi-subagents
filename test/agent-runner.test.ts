@@ -142,7 +142,7 @@ const ctx = {
   sessionManager: { getBranch: vi.fn(() => []) },
 } as any;
 
-const pi = {} as any;
+const pi = { events: { emit: vi.fn() } } as any;
 
 beforeEach(() => {
   createAgentSession.mockReset();

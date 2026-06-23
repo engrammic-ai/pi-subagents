@@ -113,7 +113,7 @@ describe("ext: / tools: scoping — template-driven e2e (real pi-mono, headless)
     // getSystemPrompt returns a distinctive marker so prompt_mode: append can be
     // proven to inherit the parent prompt.
     const ctx: any = { cwd: FIXTURES_DIR, getSystemPrompt: () => PARENT_PROMPT, model, modelRegistry };
-    const pi: any = { exec: async () => ({ code: 1, stdout: "", stderr: "" }) };
+    const pi: any = { exec: async () => ({ code: 1, stdout: "", stderr: "" }), events: { emit: () => {} } };
 
     // Mirror production: the caller resolves frontmatter-locked fields (isolated,
     // inherit_context, …) into runAgent options via resolveAgentInvocationConfig.

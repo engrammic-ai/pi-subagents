@@ -46,7 +46,7 @@ const BUILTINS = ["read", "bash", "edit", "write", "grep", "find", "ls"];
 
 /** Minimal `pi` stub — `detectEnv` only needs `exec` (returns non-git). */
 function makePi() {
-  return { exec: async () => ({ code: 1, stdout: "", stderr: "" }) } as any;
+  return { exec: async () => ({ code: 1, stdout: "", stderr: "" }), events: { emit: () => {} } } as any;
 }
 
 describe("agent-runner end-to-end (real pi-mono session + real extension)", () => {

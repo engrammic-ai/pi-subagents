@@ -16,7 +16,7 @@ vi.mock("../src/worktree.js", () => ({
 
 import { runAgent } from "../src/agent-runner.js";
 
-const mockPi = {} as any;
+const mockPi = { events: { emit: vi.fn() } } as any;
 const mockCtx = { cwd: "/tmp" } as any;
 
 const mockSession = () => ({ dispose: vi.fn() } as any);
