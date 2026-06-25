@@ -606,11 +606,52 @@ export async function runAgent(
     options.agentId ? `${baseSessionName}#${options.agentId.slice(0, 8)}` : baseSessionName,
   );
 
+  // Route permission prompts to parent if available
+  const CONFIRM_TOOL_APPROVAL_KEY = Symbol.for("veil:confirmToolApproval");
+  const parentConfirmToolApproval = (globalThis as any)[CONFIRM_TOOL_APPROVAL_KEY] as
+    | ((toolName: string, message: string) => Promise<"allow" | "deny" | "allow-session">)
+    | undefined;
+
+  // Create minimal uiContext for permission routing (other methods are stubs)
+  const uiContext = parentConfirmToolApproval ? {
+    confirmToolApproval: parentConfirmToolApproval,
+    select: async () => undefined,
+    confirm: async () => false,
+    input: async () => undefined,
+    notify: () => {},
+    onTerminalInput: () => () => {},
+    setStatus: () => {},
+    setWorkingMessage: () => {},
+    setWorkingVisible: () => {},
+    setWorkingIndicator: () => {},
+    setHiddenThinkingLabel: () => {},
+    setWidget: () => {},
+    setFooter: () => {},
+    setHeader: () => {},
+    setTitle: () => {},
+    custom: async () => undefined as never,
+    pasteToEditor: () => {},
+    setEditorText: () => {},
+    getEditorText: () => "",
+    editor: async () => undefined,
+    addAutocompleteProvider: () => {},
+    setEditorComponent: () => {},
+    getEditorComponent: () => undefined,
+    get theme() { return {} as any; },
+    getAllThemes: () => [],
+    getTheme: () => undefined,
+    setTheme: () => ({ success: false, error: "UI not available" }),
+    getToolsExpanded: () => false,
+    setToolsExpanded: () => {},
+    setToolCallDimmed: () => {},
+  } : undefined;
+
   // Bind extensions so that session_start fires and extensions can initialize
   // (e.g. loading credentials, setting up state). Tool gating already happened
   // at session construction via the `tools:` allowlist above — no separate
   // post-bind filter is needed. All ExtensionBindings fields are optional.
   await session.bindExtensions({
+    uiContext,
     onError: (err) => {
       options.onToolActivity?.({
         type: "end",
