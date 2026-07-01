@@ -574,9 +574,11 @@ export async function runAgent(
     allowedTools = options.onToolsResolve(allowedTools, type);
   }
   // Emit event for extensions to inject tools
-  const toolsEvent = { type, tools: allowedTools, agentId: options.agentId };
-  options.pi.events.emit("subagents:tools_resolve", toolsEvent);
-  allowedTools = toolsEvent.tools;
+  if (options.pi?.events) {
+    const toolsEvent = { type, tools: allowedTools, agentId: options.agentId };
+    options.pi.events.emit("subagents:tools_resolve", toolsEvent);
+    allowedTools = toolsEvent.tools;
+  }
 
   const settingsManager = SettingsManager.create(configCwd, agentDir);
   const configuredSessionDir = resolveConfiguredSessionDir(agentConfig?.sessionDir, effectiveCwd);
